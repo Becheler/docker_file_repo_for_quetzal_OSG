@@ -40,7 +40,16 @@ RUN pip3 install build twine pipenv numpy
 ENV PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 ENV PATH="$PATH:$PYTHON_BIN_PATH"
 
-RUN pip3 install GDAL==$(gdal-config --version)
+RUN pip3 install GDAL==$(gdal-config --version) quetzal-crumbs
+
+# Install Quetzal-EGGS
+RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
+&& cd quetzal-EGGS \
+&&  mkdir Release \
+&&  cd Release \
+&& cmake .. \
+&& cmake --build . --config Release \
+&& cmake --install .
 
 # Clean to make image smaller
 RUN apt-get autoclean && \
