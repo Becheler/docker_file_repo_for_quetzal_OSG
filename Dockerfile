@@ -49,7 +49,8 @@ RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
 &&  cd Release \
 && cmake .. \
 && cmake --build . --config Release \
-&& cmake --install .
+&& cmake --install . \
+&& export PATH=$PATH:quetzal-EGGS/bin/EGG1
 
 # Clean to make image smaller
 RUN apt-get autoclean && \
