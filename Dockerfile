@@ -44,12 +44,12 @@ RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
 &&  mkdir Release \
 &&  cd Release \
 && cmake .. \
-&& cmake --build . --config Release \
-&& cmake --install .
+&& cmake .. -DCMAKE_INSTALL_PREFIX="/home/EGGS" \
+&& cmake --build . --config Release --target install
 
 ENV PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 ENV PATH="$PATH:$PYTHON_BIN_PATH"
-ENV EGG1_BIN_PATH="/home/quetzal-EGGS/EGG1"
+ENV EGG1_BIN_PATH="/home/EGGS/EGG1"
 ENV PATH="$PATH:$EGG1_BIN_PATH"
 
 # Clean to make image smaller
