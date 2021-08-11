@@ -43,10 +43,8 @@ RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
 && cd quetzal-EGGS \
 &&  mkdir Release \
 &&  cd Release \
-&& cmake .. \
-&& cmake --build . --config Release \
-&& cmake --install . \
-&& echo "PATH=\$PATH:/usr/local" >> ~/.bashrc 
+&& cmake .. -DCMAKE_INSTALL_PREFIX="/usr/local" \
+&& cmake --build . --config Release --target install
 
 ENV PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 ENV PATH="$PATH:$PYTHON_BIN_PATH"
