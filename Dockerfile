@@ -36,7 +36,7 @@ RUN set -xe \
 
 RUN pip3 install --upgrade pip
 RUN pip3 install build twine pipenv numpy
-RUN pip3 install GDAL==$(gdal-config --version) quetzal-crumbs
+RUN pip3 install GDAL==$(gdal-config --version) quetzal-crumbs==0.0.3
 
 # Install Quetzal-EGGS
 RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
