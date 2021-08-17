@@ -14,7 +14,7 @@ RUN apt-get install -y --no-install-recommends\
                     g++ \
                     build-essential \
                     libboost-all-dev \
-                    cmake \
+                    cmake
 
 # Install GDAL dependencies
 RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
