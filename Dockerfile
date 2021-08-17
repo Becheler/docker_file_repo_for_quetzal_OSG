@@ -14,10 +14,13 @@ RUN apt-get install -y --no-install-recommends\
                     g++ \
                     build-essential \
                     libboost-all-dev \
-                    cmake
+                    cmake \
+                    unzip \
+                    tar \
+                    ca-certificates
 
 # Install GDAL dependencies
-RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
+RUN apt-get install -y libgdal-dev --no-install-recommends && \
     apt-get clean -y
 
 # Update C env vars so compiler can find gdal - once EGGS compiled we don't care anymore if singularity finds it or not
