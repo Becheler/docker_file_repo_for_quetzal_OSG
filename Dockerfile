@@ -42,6 +42,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Make sure you have numpy installed before attempting to install GDAL Python bindings; without numpy, the _gdal_array native code will not be installed.
 RUN pip3 install numpy
 RUN pip3 install GDAL==$(gdal-config --version) pyvolve==1.0.3 quetzal-crumbs==0.0.6
+ENV PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
+ENV PATH="$PATH:$PYTHON_BIN_PATH"
 
 # Clean to make image smaller
 RUN apt-get autoclean && \
