@@ -37,10 +37,8 @@ RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
 # Python
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.8 \
-    python3-pip \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    python3-pip
+    
 # Make sure you have numpy installed before attempting to install GDAL Python bindings; without numpy, the _gdal_array native code will not be installed.
 RUN pip3 install numpy
 RUN pip3 install GDAL==$(gdal-config --version) pyvolve==1.0.3 quetzal-crumbs==0.0.6
