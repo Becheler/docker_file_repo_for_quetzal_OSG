@@ -20,9 +20,9 @@ RUN apt-get install -y --no-install-recommends\
                     ca-certificates
 
 # Install GDAL dependencies
-RUN apt-get install -y libgdal-dev --no-install-recommends && \
+RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
     apt-get clean -y
-
+    
 # Update C env vars so compiler can find gdal - once EGGS compiled we don't care anymore if singularity finds it or not
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
