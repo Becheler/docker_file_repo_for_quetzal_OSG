@@ -26,18 +26,6 @@ RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 
-# Python
-RUN set -xe \
-    apt-get update && apt-get install -y \
-    python3.8 \
-    python3-pip \
-    python3.8-venv \
-    --no-install-recommends
-
-RUN pip3 install --upgrade pip
-RUN pip3 install build twine pipenv numpy
-RUN pip3 install GDAL==$(gdal-config --version) pyvolve==1.0.3 quetzal-crumbs==0.0.5
-
 # Install Quetzal-EGGS
 RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
 && cd quetzal-EGGS \
@@ -46,8 +34,15 @@ RUN git clone --recurse-submodules https://github.com/Becheler/quetzal-EGGS \
 && cmake .. -DCMAKE_INSTALL_PREFIX="/usr/local/quetzal-EGGS" \
 && cmake --build . --config Release --target install
 
-ENV PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
-ENV PATH="$PATH:$PYTHON_BIN_PATH"
+# Python
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.8 \
+    python3-pip \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install GDAL==$(gdal-config --version) pyvolve==1.0.3 quetzal-crumbs==0.0.5
 
 # Clean to make image smaller
 RUN apt-get autoclean && \
