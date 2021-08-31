@@ -43,7 +43,7 @@ RUN set -xe \
 
 RUN pip3 install --upgrade pip
 RUN pip3 install numpy
-RUN pip3 install GDAL==$(gdal-config --version) pyvolve==1.0.3 quetzal-crumbs==0.0.8
+RUN pip3 install GDAL==$(gdal-config --version) pyvolve==1.0.3 quetzal-crumbs==0.0.9
 
 # Clean to make image smaller
 RUN apt-get autoclean && \
